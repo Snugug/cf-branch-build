@@ -17,6 +17,8 @@ pushd `dirname $0` > /dev/null
 SCRIPTPATH=`pwd`
 popd > /dev/null
 
+$SCRIPTPATH/cf-branch-build-name
+
 $SCRIPTPATH/cf-branch-build $CF_APP
 
 cf logout
