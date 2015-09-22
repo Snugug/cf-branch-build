@@ -8,7 +8,7 @@ set -e
 set -o pipefail
 set -x
 
-echo $CF_BRANCH_NAME
+echo "$CF_BRANCH_NAME"
 
 # if [ $# -ne 1 ]; then
 #   echo "Usage:\n\n\t./cf-branch-build <appname>\n"
@@ -18,7 +18,7 @@ echo $CF_BRANCH_NAME
 finally ()
 {
   # we don't want to keep the sensitive information around
-  rm $MANIFEST
+  rm "$MANIFEST"
 }
 
 on_fail () {
@@ -30,11 +30,11 @@ on_fail () {
 trap on_fail ERR
 
 # Create Manifest
-MANIFEST=$(cat manifest.yml)
-DOMAIN=$(cat $MANIFEST | grep domain: | awk '{print $2}')
+MANIFEST="manifest.yml"
+DOMAIN=$(cat "$MANIFEST" | grep domain: | awk '{print $2}')
 
 # Create BRANCH application
-cf push $CF_BRANCH_NAME -f $MANIFEST -n $CF_BRANCH_NAME
+cf push "$CF_BRANCH_NAME" -f "$MANIFEST" -n "$CF_BRANCH_NAME"
 # ensure it starts
 curl --fail -I "https://${CF_BRANCH_NAME}.${DOMAIN}"
 
