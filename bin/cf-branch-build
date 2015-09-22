@@ -8,4 +8,4 @@ set -e
 set -o pipefail
 set -x
 
-echo $CF_BRANCH_BUILD_NAME
+echo $CF_BRANCH_NAME
