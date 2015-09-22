@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Snugug/cf-branch-build#readme",
   "bin": {
     "cf-branch-build": "./bin/cf-branch-build",
-    "cf-branch-build-travis": "./bin/cf-branch-build-travis"
+    "cf-branch-build-travis": "./bin/cf-branch-build-travis",
+    "cf-branch-build-name": "./bin/cf-branch-build-name"
   }
 }
