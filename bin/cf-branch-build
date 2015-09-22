@@ -15,12 +15,6 @@ echo "$CF_BRANCH_NAME"
 #   exit 1
 # fi
 
-finally ()
-{
-  # we don't want to keep the sensitive information around
-  rm "$MANIFEST"
-}
-
 on_fail () {
   finally
   echo "DEPLOY FAILED - you may need to check 'cf apps' and 'cf routes' and do manual cleanup"
@@ -37,7 +31,5 @@ DOMAIN=$(cat "$MANIFEST" | grep domain: | awk '{print $2}')
 cf push "$CF_BRANCH_NAME" -f "$MANIFEST" -n "$CF_BRANCH_NAME"
 # ensure it starts
 curl --fail -I "https://${CF_BRANCH_NAME}.${DOMAIN}"
-
-finally
 
 echo "DONE"
