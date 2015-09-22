@@ -14,6 +14,8 @@ fi
 
 export CF_BRANCH_NAME="$CF_BRANCH_NAME"
 
+echo "$CF_BRANCH_IGNORES"
+
 if [[ $CF_BRANCH_IGNORES != *"$CF_BRANCH_NAME"* ]]; then
 
   # Use the URL to a Debian 64 bit installer select from here:
