@@ -13,14 +13,16 @@ cf api $CF_API
 cf login --u $CF_USERNAME --p $CF_PASSWORD --o $CF_ORGANIZATION --s $CF_BRANCH_SPACE
 
 # Determine Branch Name
-CF_BRANCH_NAME="${$TRAVIS_REPO_SLUG/\//--}__"
+CF_BRANCH_NAME="${TRAVIS_REPO_SLUG/\//--}__"
 
-if [ "$TRAVIS_PULL_REQUEST" = false]
+if [ "$TRAVIS_PULL_REQUEST" = false ]
 then
   CF_BRANCH_NAME+="$TRAVIS_BRANCH"
 else
   CF_BRANCH_NAME+="pr-$(TRAVIS_PULL_REQUEST)"
 fi
+
+echo CF_BRANCH_NAME
 
 export CF_BRANCH_NAME="$CF_BRANCH_NAME"
 
