@@ -6,7 +6,6 @@
 
 set -e
 set -o pipefail
-set -x
 
 echo "$CF_BRANCH_NAME"
 
@@ -31,5 +30,8 @@ DOMAIN=$(cat "$MANIFEST" | grep domain: | awk '{print $2}')
 cf push "$CF_BRANCH_NAME" -f "$MANIFEST" -n "$CF_BRANCH_NAME"
 # ensure it starts
 curl --fail -I "https://${CF_BRANCH_NAME}.${DOMAIN}"
+
+# Echo Branch Build location
+echo "Branch build located at: https://${CF_BRANCH_NAME}.${DOMAIN}"
 
 echo "DONE"
