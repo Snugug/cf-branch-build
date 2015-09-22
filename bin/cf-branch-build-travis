@@ -2,16 +2,6 @@
 
 set -e
 
-# Use the URL to a Debian 64 bit installer select from here:
-# https://github.com/cloudfoundry/cli/releases
-# This is the source file after following the redirect
-wget https://s3.amazonaws.com/go-cli/releases/v6.12.4/cf-cli_amd64.deb -qO temp.deb && sudo dpkg -i temp.deb
-
-rm temp.deb
-
-cf api $CF_API
-cf login --u $CF_USERNAME --p $CF_PASSWORD --o $CF_ORGANIZATION --s $CF_BRANCH_SPACE
-
 # Determine Branch Name
 CF_BRANCH_NAME="${TRAVIS_REPO_SLUG/\//--}__"
 
@@ -24,13 +14,28 @@ fi
 
 export CF_BRANCH_NAME="$CF_BRANCH_NAME"
 
-# Get path to script directory: http://stackoverflow.com/a/4774063
-pushd `dirname $0` > /dev/null
-SCRIPTPATH=`pwd`
-popd > /dev/null
+if [[ $CF_BRANCH_IGNORES != *"$CF_BRANCH_NAME"* ]]; then
 
-$SCRIPTPATH/cf-branch-build-name
+  # Use the URL to a Debian 64 bit installer select from here:
+  # https://github.com/cloudfoundry/cli/releases
+  # This is the source file after following the redirect
+  wget https://s3.amazonaws.com/go-cli/releases/v6.12.4/cf-cli_amd64.deb -qO temp.deb && sudo dpkg -i temp.deb
 
-$SCRIPTPATH/cf-branch-build $CF_APP
+  rm temp.deb
 
-cf logout
+  cf api "$CF_API"
+  cf login --u "$CF_USERNAME" --p "$CF_PASSWORD" --o "$CF_ORGANIZATION" --s "$CF_BRANCH_SPACE"
+
+
+
+  # Get path to script directory: http://stackoverflow.com/a/4774063
+  pushd `dirname $0` > /dev/null
+  SCRIPTPATH=`pwd`
+  popd > /dev/null
+
+  $SCRIPTPATH/cf-branch-build-name
+
+  $SCRIPTPATH/cf-branch-build $CF_APP
+
+  cf logout
+fi
