@@ -1,0 +1,27 @@
+{
+  "name": "cf-branch-build",
+  "version": "1.0.0",
+  "description": "Branch builds for Cloud Foundry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": {
+    "cloud foundry",
+    "deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snugug/cf-branch-build.git"
+  },
+  "author": "Sam Richard <sam@snug.ug>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Snugug/cf-branch-build/issues"
+  },
+  "homepage": "https://github.com/Snugug/cf-branch-build#readme",
+  "bin": {
+    "cf-branch-build": "./bin/cf-branch-build",
+    "cf-branch-build-travis": "./bin/cf-branch-build-travis"
+  }
+}

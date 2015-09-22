@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Branch Build deployment script. Usage:
+#
+#   ./cf-branch-build <appname>
+
+set -e
+set -o pipefail
+set -x
+
+echo CF_BRANCH_NAME
