@@ -38,4 +38,6 @@ if [[ $CF_BRANCH_IGNORES != *"$CF_BRANCH_NAME"* ]]; then
   $SCRIPTPATH/cf-branch-build $CF_APP
 
   cf logout
+else
+  echo "$CF_BRANCH_NAME Ignored, Skipping"
 fi
